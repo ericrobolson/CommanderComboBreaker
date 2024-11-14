@@ -1,30 +1,23 @@
-mod app_state;
+mod states;
 
-use app_state::AppState;
 use eframe::egui::{self, Ui};
+pub enum StateResult {
+    Noop,
+    Change(Box<dyn State>),
+}
+pub trait State {
+    fn update(&mut self, ui: &mut egui::Ui, ctx: &egui::Context) -> StateResult;
+}
 
 pub struct App {
-    state: AppState,
+    state: Box<dyn State>,
+    state_history: Vec<Box<dyn State>>,
 }
 impl App {
     pub fn run() {
         let app = App {
-            state: AppState::SearchBuilder {
-                card_limit: 2,
-                colors: "Abzan".to_string(),
-            },
-        };
-        main(app).unwrap();
-    }
-
-    pub fn run_combo_builder(cards: Vec<(String, u32)>, combos: Vec<Vec<String>>) {
-        let app = App {
-            state: AppState::ComboFinder {
-                search: "".to_string(),
-                cards,
-                combo_card: None,
-                combos,
-            },
+            state_history: vec![],
+            state: Box::new(states::MegaSearch::new()),
         };
         main(app).unwrap();
     }
@@ -37,7 +30,7 @@ fn main(app: App) -> eframe::Result {
         ..Default::default()
     };
     eframe::run_native(
-        "My egui App",
+        "CommanderComboBreaker",
         options,
         Box::new(|cc| {
             // This gives us image support:
@@ -51,20 +44,7 @@ fn main(app: App) -> eframe::Result {
 impl eframe::App for App {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
-            ui.heading("My egui Application");
-            self.state.render(ui).unwrap();
-
-            // List out combos
-
-            // ui.add(egui::Slider::new(&mut self.age, 0..=120).text("age"));
-            // if ui.button("Increment").clicked() {
-            //     self.age += 1;
-            // }
-            // ui.label(format!("Hello '{}', age {}", self.name, self.age));
-
-            // ui.image(egui::include_image!(
-            //     "../../../crates/egui/assets/ferris.png"
-            // ));
+            self.state.update(ui, ctx);
         });
     }
 }

@@ -1,4 +1,4 @@
-use crate::web_page::WebPage;
+use crate::{web_page::WebPage, Color};
 use std::{
     collections::HashMap,
     sync::mpsc::{self, Receiver, Sender},
@@ -24,12 +24,12 @@ pub struct CrawlerTask {
     combos_found: usize,
 }
 impl CrawlerTask {
-    pub fn new(colors: String, num_cards_in_combo: usize) -> Self {
+    pub fn new(colors: Vec<Color>, card_name: String) -> Self {
         // spawn in background thread
         let (sender, receiver) = mpsc::channel();
         let (thread_sender, thread_receiver) = mpsc::channel();
         let handle = std::thread::spawn(move || {
-            let result = crawl(sender.clone(), thread_receiver);
+            let result = crawl(colors, card_name, sender.clone(), thread_receiver);
             sender.send(CrawlerMsg::Finished { result }).unwrap();
         });
 
@@ -71,16 +71,40 @@ impl Drop for CrawlerTask {
 }
 
 pub struct CrawlerResult {
+    pub colors: Vec<Color>,
+    pub card: Card,
     pub cards: Vec<(Card, NumResults)>,
     pub combos: Vec<Vec<Card>>,
 }
 
-fn crawl(sender: Sender<CrawlerMsg>, receiver: Receiver<CrawlerThreadMsg>) -> CrawlerResult {
+fn crawl(
+    colors: Vec<Color>,
+    card: String,
+    sender: Sender<CrawlerMsg>,
+    receiver: Receiver<CrawlerThreadMsg>,
+) -> CrawlerResult {
     let mut combos = vec![];
     let mut card_counts = HashMap::new();
 
     // Commander spellbook
-    let mut search = format!("https://commanderspellbook.com/search/?q=card%3A%22Ghave%2C+Guru+of+Spores%22+ci%3Awgb+legal%3Acommander&page=1");
+
+    let color_search = colors
+        .iter()
+        .map(|color| match color {
+            Color::White => "w",
+            Color::Blue => "u",
+            Color::Black => "b",
+            Color::Red => "r",
+            Color::Green => "g",
+            Color::Colorless => "c",
+        })
+        .collect::<Vec<_>>()
+        .join("");
+
+    let color_search = format!("ci%3A{}", color_search);
+    let card_search = html_escape::encode_text(&card);
+    todo!("{}, {}", color_search, card_search);
+    let mut search = format!("https://commanderspellbook.com/search/?q=card%3A%22Ghave%2C+Guru+of+Spores%22+{color_search}+legal%3Acommander&page=1");
     let mut keep_crawling = true;
     while keep_crawling {
         let web_page = WebPage::fetch(&search);
@@ -169,5 +193,10 @@ fn crawl(sender: Sender<CrawlerMsg>, receiver: Receiver<CrawlerThreadMsg>) -> Cr
     cards.sort_unstable_by_key(|a| (a.1, a.0.clone()));
     cards.reverse(); // ensure highest count is first
 
-    CrawlerResult { cards, combos }
+    CrawlerResult {
+        cards,
+        combos,
+        colors,
+        card,
+    }
 }

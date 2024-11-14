@@ -2,9 +2,10 @@
 
 mod app;
 mod crawler;
+mod search_result;
 mod web_page;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Color {
     White,
     Blue,
@@ -12,6 +13,30 @@ pub enum Color {
     Red,
     Green,
     Colorless,
+}
+
+impl Color {
+    pub fn all() -> Vec<Color> {
+        vec![
+            Color::White,
+            Color::Blue,
+            Color::Black,
+            Color::Red,
+            Color::Green,
+            Color::Colorless,
+        ]
+    }
+
+    pub fn check_list() -> std::collections::HashMap<Color, bool> {
+        let mut colors = std::collections::HashMap::new();
+        colors.insert(Color::White, false);
+        colors.insert(Color::Blue, false);
+        colors.insert(Color::Black, false);
+        colors.insert(Color::Red, false);
+        colors.insert(Color::Green, false);
+        colors.insert(Color::Colorless, false);
+        colors
+    }
 }
 
 fn main() -> Result<(), String> {

@@ -1,8 +1,45 @@
-use eframe::egui::{self, Ui};
+mod mega_search;
 
 use crate::crawler::CrawlerTask;
+use eframe::egui::{self, Ui};
+use mega_search::MegaSearch;
+use std::collections::HashMap;
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum Color {
+    White,
+    Blue,
+    Black,
+    Red,
+    Green,
+    Colorless,
+}
+impl Color {
+    pub fn all() -> Vec<Color> {
+        vec![
+            Color::White,
+            Color::Blue,
+            Color::Black,
+            Color::Red,
+            Color::Green,
+            Color::Colorless,
+        ]
+    }
+
+    pub fn check_list() -> HashMap<Color, bool> {
+        let mut colors = HashMap::new();
+        colors.insert(Color::White, false);
+        colors.insert(Color::Blue, false);
+        colors.insert(Color::Black, false);
+        colors.insert(Color::Red, false);
+        colors.insert(Color::Green, false);
+        colors.insert(Color::Colorless, false);
+        colors
+    }
+}
 
 pub enum AppState {
+    MegaSearch(MegaSearch),
     SearchBuilder {
         card_limit: u32,
         colors: String,
@@ -18,7 +55,19 @@ pub enum AppState {
     },
 }
 impl AppState {
-    pub fn render(&mut self, ui: &mut Ui) -> eframe::Result {
+    pub fn multi_search() -> Self {
+        let mut colors = HashMap::new();
+        colors.insert(Color::White, false);
+        colors.insert(Color::Blue, false);
+        colors.insert(Color::Black, false);
+        colors.insert(Color::Red, false);
+        colors.insert(Color::Green, false);
+        colors.insert(Color::Colorless, false);
+
+        AppState::MegaSearch(MegaSearch::new())
+    }
+
+    pub fn render(&mut self, ui: &mut Ui, ctx: &egui::Context) -> eframe::Result {
         match self {
             AppState::SearchBuilder { card_limit, colors } => {
                 // Render search builder
@@ -118,6 +167,9 @@ impl AppState {
                         combos: result.combos,
                     };
                 }
+            }
+            AppState::MegaSearch(state) => {
+                mega_search::render(ui, ctx, state);
             }
         }
         Ok(())
