@@ -7,7 +7,7 @@ use eframe::egui::{self};
 
 pub struct MegaSearch {
     search: String,
-    cards: Vec<(String, bool)>,
+    cards: Vec<(String, bool, bool)>,
     tasks: Vec<(String, CrawlerTask)>,
     results: std::collections::HashMap<String, CrawlerResult>,
     color_checkboxes: std::collections::HashMap<Color, bool>,
@@ -28,7 +28,13 @@ impl MegaSearch {
     fn selected_cards(&self) -> Vec<String> {
         self.cards
             .iter()
-            .filter_map(|(name, selected)| if *selected { Some(name.clone()) } else { None })
+            .filter_map(|(name, view_combos, _)| {
+                if *view_combos {
+                    Some(name.clone())
+                } else {
+                    None
+                }
+            })
             .collect()
     }
     fn selected_colors(&self) -> Vec<Color> {
@@ -39,11 +45,18 @@ impl MegaSearch {
     }
 
     fn add_card(&mut self, card: String) {
-        let task = CrawlerTask::new(self.selected_colors(), card.clone());
+        let card_name = if card.is_empty() {
+            None
+        } else {
+            Some(card.clone())
+        };
+        let task = CrawlerTask::new(self.selected_colors(), card_name);
         self.tasks.push((card.clone(), task));
-        self.cards.push((card.clone(), false));
+        self.cards.push((card.clone(), false, false));
         self.cards.sort();
     }
+
+    fn recalculate_matching_combos(&mut self) {}
 
     fn render_search_box(&mut self, ui: &mut egui::Ui, ctx: &egui::Context) {
         ui.horizontal(|ui| {
@@ -79,15 +92,22 @@ impl MegaSearch {
     fn render_combo_selector(&mut self, ui: &mut egui::Ui, ctx: &egui::Context) {
         ui.horizontal(|ui| {
             if ui.button("Clear selected combo cards").clicked() {
-                self.cards.iter_mut().for_each(|(_name, selected)| {
-                    *selected = false;
-                });
+                self.cards
+                    .iter_mut()
+                    .for_each(|(_name, selected, in_combo_pool)| {
+                        *selected = false;
+                        *in_combo_pool = false;
+                    });
             }
         });
         let mut cards_to_remove = vec![];
-        for (card, selected) in self.cards.iter_mut() {
-            ui.horizontal(|ui| {
-                ui.checkbox(selected, "View Combos");
+        let mut should_recalculate_combos = false;
+        for (card, view_combos, in_combo_pool) in self.cards.iter_mut() {
+            ui.horizontal(|ui: &mut egui::Ui| {
+                ui.checkbox(view_combos, "View Combos");
+                if ui.checkbox(in_combo_pool, "In Combo Pool").changed() {
+                    should_recalculate_combos = true;
+                }
 
                 let button = ui.button("Remove").on_hover_text("Remove card");
                 if button.clicked() {
@@ -99,7 +119,13 @@ impl MegaSearch {
         }
 
         for card in cards_to_remove {
-            self.cards.retain(|(name, _selected)| name != &card);
+            should_recalculate_combos = true;
+            self.cards
+                .retain(|(name, _view_combos, _in_combo_pool)| name != &card);
+        }
+
+        if should_recalculate_combos {
+            self.recalculate_matching_combos();
         }
     }
 

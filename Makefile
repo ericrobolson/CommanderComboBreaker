@@ -1,6 +1,8 @@
 run:
 	cargo watch -w src -x run
 
-test:
-	cargo test
+card_finder:
+	cargo watch -w src -x 'run -- Magus Lucea Kane'
 
+test:
+	cargo watch -w src -x test

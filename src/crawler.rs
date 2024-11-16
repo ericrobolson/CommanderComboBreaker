@@ -24,7 +24,7 @@ pub struct CrawlerTask {
     combos_found: usize,
 }
 impl CrawlerTask {
-    pub fn new(colors: Vec<Color>, card_name: String) -> Self {
+    pub fn new(colors: Vec<Color>, card_name: Option<String>) -> Self {
         // spawn in background thread
         let (sender, receiver) = mpsc::channel();
         let (thread_sender, thread_receiver) = mpsc::channel();
@@ -70,16 +70,17 @@ impl Drop for CrawlerTask {
     }
 }
 
+#[derive(Debug, Clone)]
 pub struct CrawlerResult {
     pub colors: Vec<Color>,
-    pub card: Card,
+    pub card: Option<Card>,
     pub cards: Vec<(Card, NumResults)>,
     pub combos: Vec<Vec<Card>>,
 }
 
 fn crawl(
     colors: Vec<Color>,
-    card: String,
+    card: Option<String>,
     sender: Sender<CrawlerMsg>,
     receiver: Receiver<CrawlerThreadMsg>,
 ) -> CrawlerResult {
@@ -87,24 +88,10 @@ fn crawl(
     let mut card_counts = HashMap::new();
 
     // Commander spellbook
-
-    let color_search = colors
-        .iter()
-        .map(|color| match color {
-            Color::White => "w",
-            Color::Blue => "u",
-            Color::Black => "b",
-            Color::Red => "r",
-            Color::Green => "g",
-            Color::Colorless => "c",
-        })
-        .collect::<Vec<_>>()
-        .join("");
-
-    let color_search = format!("ci%3A{}", color_search);
-    let card_search = html_escape::encode_text(&card);
-    todo!("{}, {}", color_search, card_search);
-    let mut search = format!("https://commanderspellbook.com/search/?q=card%3A%22Ghave%2C+Guru+of+Spores%22+{color_search}+legal%3Acommander&page=1");
+    let mut search = format!(
+        "{}&page=1",
+        commander_spellbook_search(&colors, card.clone())
+    );
     let mut keep_crawling = true;
     while keep_crawling {
         let web_page = WebPage::fetch(&search);
@@ -198,5 +185,84 @@ fn crawl(
         combos,
         colors,
         card,
+    }
+}
+
+// TODO: add format, card count, etc.
+fn commander_spellbook_search(colors: &Vec<Color>, card: Option<String>) -> String {
+    let make_param = |param: String, text: String| -> String { format!("{param}%3A%22{text}%22") };
+
+    let card = if let Some(card) = card {
+        let card = card
+            .trim()
+            .replace(" ", "%20")
+            .replace(",", "%2C")
+            .replace("'", "%27");
+
+        Some(card)
+    } else {
+        None
+    };
+
+    let mut params = vec![];
+
+    if let Some(card) = card {
+        params.push(make_param("card".to_string(), card));
+    }
+
+    if colors.is_empty() == false {
+        let colors_string = colors
+            .iter()
+            .map(|color| match color {
+                Color::White => "w",
+                Color::Blue => "u",
+                Color::Black => "b",
+                Color::Red => "r",
+                Color::Green => "g",
+                Color::Colorless => "c",
+            })
+            .collect::<Vec<_>>()
+            .join("");
+
+        params.push(make_param("ci".to_string(), colors_string));
+    }
+    let param_string = params.join("%20");
+
+    format!("https://commanderspellbook.com/search/?q={param_string}",)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn commander_spellbook_search_ghave() {
+        let cases = vec![
+            (
+                vec![],
+                Some("Ghave, Guru of Spores".to_string()),
+                "https://commanderspellbook.com/search/?q=card%3A%22Ghave%2C%20Guru%20of%20Spores%22",
+            ),
+            (
+                vec![],
+                Some("Ashnod's Altar".to_string()),
+                "https://commanderspellbook.com/search/?q=card%3A%22Ashnod%27s%20Altar%22",
+            ),
+            (
+                vec![Color::White, Color::Green, Color::Black],
+                Some("Ashnod's Altar".to_string()),
+                "https://commanderspellbook.com/search/?q=card%3A%22Ashnod%27s%20Altar%22%20ci%3A%22wgb%22",
+            ),
+            (
+                vec![Color::White, Color::Green, Color::Black],
+                None,
+                "https://commanderspellbook.com/search/?q=ci%3A%22wgb%22",
+            ),
+        ];
+
+        for (colors, card, expected) in cases {
+            let actual = commander_spellbook_search(&colors, card);
+            assert_eq!(expected, actual);
+        }
     }
 }

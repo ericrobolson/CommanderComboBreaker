@@ -3,6 +3,8 @@
 - [x] Add implement actual search button with the GUI
 - [x] Use a background thread to search for combos and not block ui
 - [x] Have a way to render the combos processed in ui thread
-- [ ] Make dynamic searching work
+- [x] Make dynamic searching work
+- [ ] Build out new task to search for combos and make sure that there's X combos
+- [ ] Add ability to specify format + card count + optional card name
 - [ ] Persist combos to db?
 - [ ] Allow building overlapping combos. E.g. you select several cards, then it lists the combos that share the most pieces between them
