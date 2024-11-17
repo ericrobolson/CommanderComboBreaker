@@ -2,178 +2,55 @@
 Cards: 31
 -----
 Ashaya, Soul of the Wild
-Kydele, Chosen of Kruphix
-Arixmethes, Slumbering Isle
-Thornbite Staff
-Voyaging Satyr
-Mycosynth Lattice
-Blossom Dryad
-Nyxbloom Ancient
-Pili-Pala
-Lotus Vale
-Arbor Elf
 Magus Lucea Kane
-Stone-Seeder Hierophant
+Staff of Domination
+Mana Reflection
+Kinnan, Bonder Prodigy
+Blossom Dryad
+Kydele, Chosen of Kruphix
+Song of Freyalise
+Voyaging Satyr
+Lotus Vale
+Cryptolith Rite
+Thermopod
+Vhal, Candlekeep Researcher
+Nyxbloom Ancient
+Magus of the Candelabra
+Pili-Pala
+Arbor Elf
+Arixmethes, Slumbering Isle
 Kiki-Jiki, Mirror Breaker
 Krenko, Mob Boss
-Pemmin's Aura
-Kinnan, Bonder Prodigy
-Chromatic Orrery
-Song of Freyalise
-Vhal, Candlekeep Researcher
-Hope Tender
-Thermopod
-Umbral Mantle
-Cryptolith Rite
-Mana Reflection
 Paradise Mantle
+Hope Tender
+Thornbite Staff
+Mycosynth Lattice
+Pemmin's Aura
 Lotus Field
 Freed from the Real
-Magus of the Candelabra
+Umbral Mantle
+Stone-Seeder Hierophant
+Chromatic Orrery
 Agatha's Soul Cauldron
-Staff of Domination
 
 
 
 -----
-Combos: 139
+Combos: 16
 -----
-Kydele, Chosen of Kruphix, Umbral Mantle
-Vhal, Candlekeep Researcher, Umbral Mantle
-Krenko, Mob Boss, Umbral Mantle, Thermopod
 Magus Lucea Kane, Umbral Mantle, Nyxbloom Ancient
 Magus Lucea Kane, Umbral Mantle, Mana Reflection
-Arixmethes, Slumbering Isle, Pemmin's Aura
-Kinnan, Bonder Prodigy, Cryptolith Rite, Pemmin's Aura
-Kinnan, Bonder Prodigy, Paradise Mantle, Pemmin's Aura
-Pemmin's Aura, Voyaging Satyr, Arixmethes, Slumbering Isle
-Cryptolith Rite, Pemmin's Aura, Nyxbloom Ancient
-Paradise Mantle, Pemmin's Aura, Nyxbloom Ancient
-Lotus Field, Voyaging Satyr, Pemmin's Aura
-Cryptolith Rite, Pemmin's Aura, Mana Reflection
 Magus Lucea Kane, Pemmin's Aura, Chromatic Orrery
-Pemmin's Aura, Magus of the Candelabra, Lotus Field
-Vhal, Candlekeep Researcher, Pemmin's Aura, Chromatic Orrery
-Paradise Mantle, Pemmin's Aura, Mana Reflection
-Kinnan, Bonder Prodigy, Song of Freyalise, Pemmin's Aura
-Kydele, Chosen of Kruphix, Pemmin's Aura, Chromatic Orrery
-Pemmin's Aura, Voyaging Satyr, Lotus Vale
-Pemmin's Aura, Stone-Seeder Hierophant, Lotus Field
-Pemmin's Aura, Hope Tender, Lotus Field
-Pemmin's Aura, Stone-Seeder Hierophant, Arixmethes, Slumbering Isle
-Pemmin's Aura, Magus of the Candelabra, Lotus Vale
-Pemmin's Aura, Blossom Dryad, Lotus Field
-Pemmin's Aura, Hope Tender, Arixmethes, Slumbering Isle
-Song of Freyalise, Pemmin's Aura, Nyxbloom Ancient
 Magus Lucea Kane, Pemmin's Aura, Mycosynth Lattice
-Pemmin's Aura, Blossom Dryad, Arixmethes, Slumbering Isle
-Pemmin's Aura, Stone-Seeder Hierophant, Lotus Vale
-Song of Freyalise, Pemmin's Aura, Mana Reflection
-Pemmin's Aura, Hope Tender, Lotus Vale
-Vhal, Candlekeep Researcher, Pemmin's Aura, Mycosynth Lattice
-Pemmin's Aura, Blossom Dryad, Lotus Vale
-Kydele, Chosen of Kruphix, Pemmin's Aura, Mycosynth Lattice
 Magus Lucea Kane, Freed from the Real, Mycosynth Lattice
 Magus Lucea Kane, Pemmin's Aura, Mycosynth Lattice
-Vhal, Candlekeep Researcher, Freed from the Real, Mycosynth Lattice
-Kydele, Chosen of Kruphix, Freed from the Real, Mycosynth Lattice
-Vhal, Candlekeep Researcher, Pemmin's Aura, Mycosynth Lattice
-Kydele, Chosen of Kruphix, Pemmin's Aura, Mycosynth Lattice
-Arixmethes, Slumbering Isle, Freed from the Real
-Kinnan, Bonder Prodigy, Cryptolith Rite, Freed from the Real
-Kinnan, Bonder Prodigy, Paradise Mantle, Freed from the Real
-Freed from the Real, Voyaging Satyr, Arixmethes, Slumbering Isle
-Cryptolith Rite, Freed from the Real, Nyxbloom Ancient
-Paradise Mantle, Freed from the Real, Nyxbloom Ancient
-Lotus Field, Voyaging Satyr, Freed from the Real
 Magus Lucea Kane, Freed from the Real, Chromatic Orrery
-Cryptolith Rite, Freed from the Real, Mana Reflection
-Freed from the Real, Magus of the Candelabra, Lotus Field
-Kydele, Chosen of Kruphix, Freed from the Real, Chromatic Orrery
-Kinnan, Bonder Prodigy, Song of Freyalise, Freed from the Real
-Vhal, Candlekeep Researcher, Freed from the Real, Chromatic Orrery
-Freed from the Real, Stone-Seeder Hierophant, Lotus Field
-Paradise Mantle, Freed from the Real, Mana Reflection
-Freed from the Real, Hope Tender, Lotus Field
-Freed from the Real, Stone-Seeder Hierophant, Arixmethes, Slumbering Isle
-Freed from the Real, Voyaging Satyr, Lotus Vale
-Freed from the Real, Magus of the Candelabra, Lotus Vale
-Freed from the Real, Blossom Dryad, Lotus Field
-Freed from the Real, Blossom Dryad, Arixmethes, Slumbering Isle
-Song of Freyalise, Freed from the Real, Nyxbloom Ancient
-Freed from the Real, Hope Tender, Arixmethes, Slumbering Isle
 Magus Lucea Kane, Freed from the Real, Mycosynth Lattice
-Vhal, Candlekeep Researcher, Freed from the Real, Mycosynth Lattice
-Song of Freyalise, Freed from the Real, Mana Reflection
-Freed from the Real, Stone-Seeder Hierophant, Lotus Vale
-Kydele, Chosen of Kruphix, Freed from the Real, Mycosynth Lattice
-Freed from the Real, Hope Tender, Lotus Vale
-Freed from the Real, Blossom Dryad, Lotus Vale
 Magus Lucea Kane, Freed from the Real, Chromatic Orrery
 Magus Lucea Kane, Pemmin's Aura, Chromatic Orrery
-Kydele, Chosen of Kruphix, Freed from the Real, Chromatic Orrery
-Vhal, Candlekeep Researcher, Freed from the Real, Chromatic Orrery
-Vhal, Candlekeep Researcher, Pemmin's Aura, Chromatic Orrery
-Kydele, Chosen of Kruphix, Pemmin's Aura, Chromatic Orrery
-Krenko, Mob Boss, Thornbite Staff, Thermopod
-Kiki-Jiki, Mirror Breaker, Thornbite Staff, Thermopod
-Krenko, Mob Boss, Staff of Domination, Thermopod
-Krenko, Mob Boss, Thornbite Staff, Thermopod
-Krenko, Mob Boss, Umbral Mantle, Thermopod
-Kiki-Jiki, Mirror Breaker, Thornbite Staff, Thermopod
-Pili-Pala, Kinnan, Bonder Prodigy, Paradise Mantle
-Pili-Pala, Kinnan, Bonder Prodigy, Cryptolith Rite
-Pili-Pala, Nyxbloom Ancient, Cryptolith Rite
-Pili-Pala, Nyxbloom Ancient, Paradise Mantle
-Ashaya, Soul of the Wild, Pili-Pala, Nyxbloom Ancient
-Pili-Pala, Mana Reflection, Paradise Mantle
-Pili-Pala, Mana Reflection, Cryptolith Rite
-Pili-Pala, Kinnan, Bonder Prodigy, Song of Freyalise
-Ashaya, Soul of the Wild, Pili-Pala, Mana Reflection
-Pili-Pala, Nyxbloom Ancient, Song of Freyalise
-Pili-Pala, Mana Reflection, Song of Freyalise
 Magus Lucea Kane, Pili-Pala, Agatha's Soul Cauldron
-Magus of the Candelabra, Staff of Domination, Nyxbloom Ancient
-Cryptolith Rite, Freed from the Real, Nyxbloom Ancient
-Paradise Mantle, Freed from the Real, Nyxbloom Ancient
-Cryptolith Rite, Pemmin's Aura, Nyxbloom Ancient
-Paradise Mantle, Pemmin's Aura, Nyxbloom Ancient
-Ashaya, Soul of the Wild, Hope Tender, Nyxbloom Ancient
 Magus Lucea Kane, Umbral Mantle, Nyxbloom Ancient
-Pili-Pala, Nyxbloom Ancient, Cryptolith Rite
-Pili-Pala, Nyxbloom Ancient, Paradise Mantle
-Ashaya, Soul of the Wild, Pili-Pala, Nyxbloom Ancient
-Song of Freyalise, Freed from the Real, Nyxbloom Ancient
-Song of Freyalise, Pemmin's Aura, Nyxbloom Ancient
-Pili-Pala, Nyxbloom Ancient, Song of Freyalise
-Magus of the Candelabra, Staff of Domination, Mana Reflection
-Cryptolith Rite, Freed from the Real, Mana Reflection
-Cryptolith Rite, Pemmin's Aura, Mana Reflection
 Magus Lucea Kane, Umbral Mantle, Mana Reflection
-Ashaya, Soul of the Wild, Hope Tender, Mana Reflection
-Paradise Mantle, Freed from the Real, Mana Reflection
-Paradise Mantle, Pemmin's Aura, Mana Reflection
-Pili-Pala, Mana Reflection, Paradise Mantle
-Pili-Pala, Mana Reflection, Cryptolith Rite
-Ashaya, Soul of the Wild, Pili-Pala, Mana Reflection
-Song of Freyalise, Freed from the Real, Mana Reflection
-Pili-Pala, Mana Reflection, Song of Freyalise
-Song of Freyalise, Pemmin's Aura, Mana Reflection
-Magus of the Candelabra, Staff of Domination, Nyxbloom Ancient
-Magus of the Candelabra, Staff of Domination, Mana Reflection
 Magus Lucea Kane, Ashaya, Soul of the Wild, Magus of the Candelabra
-Freed from the Real, Magus of the Candelabra, Lotus Field
-Pemmin's Aura, Magus of the Candelabra, Lotus Field
-Freed from the Real, Magus of the Candelabra, Lotus Vale
-Pemmin's Aura, Magus of the Candelabra, Lotus Vale
-Ashaya, Soul of the Wild, Kiki-Jiki, Mirror Breaker, Arbor Elf
 Magus Lucea Kane, Ashaya, Soul of the Wild, Magus of the Candelabra
-Ashaya, Soul of the Wild, Hope Tender, Nyxbloom Ancient
-Ashaya, Soul of the Wild, Hope Tender, Mana Reflection
-Ashaya, Soul of the Wild, Pili-Pala, Nyxbloom Ancient
-Ashaya, Soul of the Wild, Pili-Pala, Mana Reflection
-Ashaya, Soul of the Wild, Kiki-Jiki, Mirror Breaker, Voyaging Satyr
-Ashaya, Soul of the Wild, Kiki-Jiki, Mirror Breaker, Hope Tender
-Ashaya, Soul of the Wild, Kiki-Jiki, Mirror Breaker, Stone-Seeder Hierophant
-Ashaya, Soul of the Wild, Kiki-Jiki, Mirror Breaker, Blossom Dryad
 Magus Lucea Kane, Pili-Pala, Agatha's Soul Cauldron

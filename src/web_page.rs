@@ -1,3 +1,11 @@
+use std::sync::Mutex;
+
+use lazy_static::lazy_static;
+
+lazy_static! {
+    static ref DBLOCK: Mutex<i32> = Mutex::new(0i32);
+}
+
 #[derive(Debug, Clone)]
 pub struct WebPage {
     pub id: i32,
@@ -6,6 +14,14 @@ pub struct WebPage {
 }
 impl WebPage {
     pub fn fetch(url: &str) -> Self {
+        let lock = match DBLOCK.lock() {
+            Ok(lock) => lock,
+            Err(poisoned) => {
+                // Sleep then fetch
+                std::thread::sleep(std::time::Duration::from_secs(1));
+                return Self::fetch(url);
+            }
+        };
         // Pull from db
         let db = rusqlite::Connection::open("ccb.sqlite").unwrap();
         let mut stmt = db

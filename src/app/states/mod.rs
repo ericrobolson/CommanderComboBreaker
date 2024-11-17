@@ -50,7 +50,11 @@ impl MegaSearch {
         } else {
             Some(card.clone())
         };
-        let task = CrawlerTask::new(self.selected_colors(), card_name);
+        let task = CrawlerTask::new(
+            self.selected_colors(),
+            card_name,
+            Some(crate::crawler::Format::Commander),
+        );
         self.tasks.push((card.clone(), task));
         self.cards.push((card.clone(), false, false));
         self.cards.sort();

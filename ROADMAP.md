@@ -4,7 +4,10 @@
 - [x] Use a background thread to search for combos and not block ui
 - [x] Have a way to render the combos processed in ui thread
 - [x] Make dynamic searching work
-- [ ] Build out new task to search for combos and make sure that there's X combos
-- [ ] Add ability to specify format + card count + optional card name
+- [x] Build out new task to search for combos and make sure that there's X combos
+- [x] Add ability to specify format + card count + optional card name
+- [ ] Fix issue with db locking
+- [ ] Make webapp or a ui for this
 - [ ] Persist combos to db?
+- [ ] Add card # criteria to crawler search
 - [ ] Allow building overlapping combos. E.g. you select several cards, then it lists the combos that share the most pieces between them
