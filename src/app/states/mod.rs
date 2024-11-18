@@ -54,7 +54,7 @@ impl MegaSearch {
             self.selected_colors(),
             card_name,
             Some(crate::crawler::Format::Commander),
-            None,
+            crate::crawler::CardNumber::None,
         );
         self.tasks.push((card.clone(), task));
         self.cards.push((card.clone(), false, false));

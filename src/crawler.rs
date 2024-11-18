@@ -21,6 +21,14 @@ enum CrawlerThreadMsg {
     Stop,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum CardNumber {
+    None,
+    Exact(u32),
+    GreaterThan(u32),
+    LessThan(u32),
+}
+
 pub struct CrawlerTask {
     pub result: Option<CrawlerResult>,
     receiver: Receiver<CrawlerMsg>,
@@ -33,7 +41,7 @@ impl CrawlerTask {
         colors: Vec<Color>,
         card_name: Option<String>,
         format: Option<Format>,
-        card_number: Option<u32>,
+        card_number: CardNumber,
     ) -> Self {
         // spawn in background thread
         let (sender, receiver) = mpsc::channel();
@@ -100,7 +108,7 @@ fn crawl(
     colors: Vec<Color>,
     card: Option<String>,
     format: Option<Format>,
-    card_number: Option<u32>,
+    card_number: CardNumber,
     sender: Sender<CrawlerMsg>,
     receiver: Receiver<CrawlerThreadMsg>,
 ) -> CrawlerResult {
@@ -214,7 +222,7 @@ fn commander_spellbook_search(
     colors: &Vec<Color>,
     card: Option<String>,
     format: Option<Format>,
-    card_number: Option<u32>,
+    card_number: CardNumber,
 ) -> String {
     let make_param = |param: String, text: String, use_quotes: bool| -> String {
         if use_quotes {
@@ -272,12 +280,17 @@ fn commander_spellbook_search(
         ));
     }
 
-    if let Some(card_number) = card_number {
-        params.push(make_param(
-            "cards".to_string(),
-            card_number.to_string(),
-            false,
-        ));
+    match card_number {
+        CardNumber::None => {}
+        CardNumber::Exact(count) => {
+            params.push(make_param("cards".to_string(), count.to_string(), false));
+        }
+        CardNumber::GreaterThan(count) => {
+            params.push(format!("cards%3E{}", count.to_string()));
+        }
+        CardNumber::LessThan(count) => {
+            params.push(format!("cards%3C{}", count.to_string()));
+        }
     }
 
     let param_string = params.join("%20");
@@ -298,28 +311,28 @@ mod tests {
                 vec![],
                 Some("Ghave, Guru of Spores".to_string()),
                 None,
-                None,
+                CardNumber::None,
                 "https://commanderspellbook.com/search/?q=card%3A%22Ghave%2C%20Guru%20of%20Spores%22",
             ),
             (
                 vec![],
                 None,
                 Some(Format::Commander),
-                None,
+                CardNumber::None,
                 "https://commanderspellbook.com/search/?q=legal%3Acommander",
             ),
             (
                 vec![],
                 None,
                 Some(Format::Brawl),
-                None,
+                CardNumber::None,
                 "https://commanderspellbook.com/search/?q=legal%3Abrawl"
             ),
             (
                 vec![],
                 Some("Ashnod's Altar".to_string()),
                 None,
-                None,
+                CardNumber::None,
                 "https://commanderspellbook.com/search/?q=card%3A%22Ashnod%27s%20Altar%22",
 
             ),
@@ -327,7 +340,7 @@ mod tests {
                 vec![Color::White, Color::Green, Color::Black],
                 Some("Ashnod's Altar".to_string()),
                 None,
-                None,
+                CardNumber::None,
                 "https://commanderspellbook.com/search/?q=card%3A%22Ashnod%27s%20Altar%22%20ci%3A%22wgb%22",
 
             ),
@@ -335,32 +348,46 @@ mod tests {
                 vec![Color::White, Color::Green, Color::Black],
                 Some("Ashnod's Altar".to_string()),
                 Some(Format::Commander),
-                None,
+                CardNumber::None,
                 "https://commanderspellbook.com/search/?q=card%3A%22Ashnod%27s%20Altar%22%20ci%3A%22wgb%22%20legal%3Acommander",
             ),
             (
                 vec![Color::White, Color::Green, Color::Black],
                 None,
                 None,
-                None,
+                CardNumber::None,
                 "https://commanderspellbook.com/search/?q=ci%3A%22wgb%22",
             ),
-            (vec![], None, None, Some(3), "https://commanderspellbook.com/search/?q=cards%3A3"),
-            (vec![], Some("Ashnod's Altar".to_string()), None, Some(3), "https://commanderspellbook.com/search/?q=card%3A%22Ashnod%27s%20Altar%22%20cards%3A3"),
+            (vec![], None, None, CardNumber::Exact(3), "https://commanderspellbook.com/search/?q=cards%3A3"),
+            (vec![], Some("Ashnod's Altar".to_string()), None, CardNumber::Exact(3), "https://commanderspellbook.com/search/?q=card%3A%22Ashnod%27s%20Altar%22%20cards%3A3"),
             (
                 vec![Color::White, Color::Green, Color::Black],
                 Some("Ashnod's Altar".to_string()),
                 Some(Format::Commander),
-                Some(3),
+                CardNumber::Exact(3),
                 "https://commanderspellbook.com/search/?q=card%3A%22Ashnod%27s%20Altar%22%20ci%3A%22wgb%22%20legal%3Acommander%20cards%3A3",
             ),
             (
                 vec![Color::White, Color::Green, Color::Black],
                 Some("Ashnod's Altar".to_string()),
                 Some(Format::Brawl),
-                Some(3),
+                CardNumber::Exact(3),
                 "https://commanderspellbook.com/search/?q=card%3A%22Ashnod%27s%20Altar%22%20ci%3A%22wgb%22%20legal%3Abrawl%20cards%3A3",
             ),
+            (
+                vec![],
+                None,
+                None,
+                CardNumber::GreaterThan(3),
+                "https://commanderspellbook.com/search/?q=cards%3E3",
+            ), 
+            (
+                vec![],
+                None,
+                None,
+                CardNumber::LessThan(3),
+                "https://commanderspellbook.com/search/?q=cards%3C3",
+            ), 
         ];
 
         for (colors, card, format, card_number, expected) in cases {

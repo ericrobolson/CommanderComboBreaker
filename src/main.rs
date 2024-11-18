@@ -61,9 +61,9 @@ fn main() -> Result<(), String> {
     } else {
         Some(env_args.join(" "))
     };
-    let colors = vec![Color::Blue, Color::Red, Color::Green];
-    let format = Some(crawler::Format::Commander);
-    let card_number = None;
+    let colors = vec![Color::Blue, Color::White, Color::Green];
+    let format = Some(crawler::Format::Brawl);
+    let card_number = crawler::CardNumber::LessThan(4);
 
     let mut search = crawler::CrawlerTask::new(colors.clone(), card.clone(), format, card_number);
     loop {
@@ -128,7 +128,7 @@ fn main() -> Result<(), String> {
         }
     }
 
-    let minimum_combo_count = 20;
+    let minimum_combo_count = 5;
     for (card_to_check, count) in card_counts.iter() {
         if *count < minimum_combo_count && card != Some(card_to_check.clone()) {
             // Remove from total_combos anything that uses that card

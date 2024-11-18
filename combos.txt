@@ -1,56 +1,13 @@
 -----
-Cards: 31
+Cards: 3
 -----
-Ashaya, Soul of the Wild
-Magus Lucea Kane
+Incubation Druid
 Staff of Domination
-Mana Reflection
-Kinnan, Bonder Prodigy
-Blossom Dryad
-Kydele, Chosen of Kruphix
-Song of Freyalise
-Voyaging Satyr
-Lotus Vale
-Cryptolith Rite
-Thermopod
-Vhal, Candlekeep Researcher
 Nyxbloom Ancient
-Magus of the Candelabra
-Pili-Pala
-Arbor Elf
-Arixmethes, Slumbering Isle
-Kiki-Jiki, Mirror Breaker
-Krenko, Mob Boss
-Paradise Mantle
-Hope Tender
-Thornbite Staff
-Mycosynth Lattice
-Pemmin's Aura
-Lotus Field
-Freed from the Real
-Umbral Mantle
-Stone-Seeder Hierophant
-Chromatic Orrery
-Agatha's Soul Cauldron
 
 
 
 -----
-Combos: 16
+Combos: 1
 -----
-Magus Lucea Kane, Umbral Mantle, Nyxbloom Ancient
-Magus Lucea Kane, Umbral Mantle, Mana Reflection
-Magus Lucea Kane, Pemmin's Aura, Chromatic Orrery
-Magus Lucea Kane, Pemmin's Aura, Mycosynth Lattice
-Magus Lucea Kane, Freed from the Real, Mycosynth Lattice
-Magus Lucea Kane, Pemmin's Aura, Mycosynth Lattice
-Magus Lucea Kane, Freed from the Real, Chromatic Orrery
-Magus Lucea Kane, Freed from the Real, Mycosynth Lattice
-Magus Lucea Kane, Freed from the Real, Chromatic Orrery
-Magus Lucea Kane, Pemmin's Aura, Chromatic Orrery
-Magus Lucea Kane, Pili-Pala, Agatha's Soul Cauldron
-Magus Lucea Kane, Umbral Mantle, Nyxbloom Ancient
-Magus Lucea Kane, Umbral Mantle, Mana Reflection
-Magus Lucea Kane, Ashaya, Soul of the Wild, Magus of the Candelabra
-Magus Lucea Kane, Ashaya, Soul of the Wild, Magus of the Candelabra
-Magus Lucea Kane, Pili-Pala, Agatha's Soul Cauldron
+Incubation Druid, Staff of Domination, Nyxbloom Ancient
