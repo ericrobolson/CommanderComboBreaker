@@ -6,7 +6,8 @@
 - [x] Make dynamic searching work
 - [x] Build out new task to search for combos and make sure that there's X combos
 - [x] Add ability to specify format + card count + optional card name
-- [ ] Fix issue with db locking
+- [x] Add ability to search on card number + legality
+- [ ] Fix issue with db locking; swap to postgres
 - [ ] Make webapp or a ui for this
 - [ ] Persist combos to db?
 - [ ] Add card # criteria to crawler search

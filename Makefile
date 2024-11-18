@@ -6,3 +6,9 @@ card_finder:
 
 test:
 	cargo watch -w src -x test
+
+db:
+	sudo docker-compose up -d
+
+install:
+	cargo install cargo-watch

@@ -1,6 +1,5 @@
 // #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
 
-use core::task;
 use std::{collections::HashSet, io::Write};
 
 mod app;
@@ -64,8 +63,9 @@ fn main() -> Result<(), String> {
     };
     let colors = vec![Color::Blue, Color::Red, Color::Green];
     let format = Some(crawler::Format::Commander);
+    let card_number = None;
 
-    let mut search = crawler::CrawlerTask::new(colors.clone(), card.clone(), format);
+    let mut search = crawler::CrawlerTask::new(colors.clone(), card.clone(), format, card_number);
     loop {
         search.update();
         if search.result.is_some() {
@@ -89,7 +89,7 @@ fn main() -> Result<(), String> {
     let mut tasks = vec![];
     for card in cards {
         println!("Searching for combos with {}", card);
-        let task = crawler::CrawlerTask::new(colors.clone(), Some(card), format);
+        let task = crawler::CrawlerTask::new(colors.clone(), Some(card), format, card_number);
         tasks.push(task);
     }
 
