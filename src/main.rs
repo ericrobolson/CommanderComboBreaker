@@ -41,7 +41,7 @@ impl Color {
 }
 
 fn main() -> Result<(), String> {
-    // app::App::run();
+    app::App::run();
     let db = rusqlite::Connection::open("ccb.sqlite").unwrap();
     db.execute(
         "CREATE TABLE IF NOT EXISTS html_page (
